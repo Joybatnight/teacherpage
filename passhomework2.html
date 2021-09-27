@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>專題練習</title>
+    </head>
+    <body>
+        <div class="login-wrapper">
+            <form action="English.html" class="form">
+            <img src="harley.jpg" alt="">
+            <h2>Do you want to access?</h2>
+            <div class="input-group">
+                <input type="text" name="loginUser" id="loginUser" required placeholder="User name">
+            <div class="input-group">
+                    <input type="password" name="loginPassword" id="loginPassword" required placeholder="password">
+            </div>
+            <input type="submit"   value="Login" class="submit-btn">
+            <a href="#forgot-pw" class="forgot-pw">Forgot Password?</a>
+            </form>
+            <div id="forgot-pw">
+                <form action="" class="from">
+                    <a href="#" class="close">&times;</a>
+                    <h2>Rest Password</h2>
+                    <div class="input-group">
+                        <input type="email" name="email" id="email" required>
+                        <label for="email">email</label>
+                    </div>
+                    <input type="submit" value="Submit" class="submit-btn">
+
+                    <script>
+                        function check() {
+                            if (form1.loginUser.value == "123" && form1.loginPassword.value == "2") {
+                                return true;
+                            } else {
+                                return false;
+                            }
+            
+                        }
+                    </script>
+                
+
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
