@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <!-- input css -->
+        <title>專題練習2</title>
+        <script src="Javasprict.js"></script>
+        <!-- input js -->
+    </head>
+    <body>
+        <div class="login-wrapper">
+            <form class="form">
+            <img src="harley.jpg" alt="">
+            <h2>Do you want to access?</h2>
+            <div class="input-group">
+                <input type="text" name="loginUser" id="loginUser" required placeholder="Username">
+            <div class="input-group">
+                    <input type="password" name="loginPassword" id="loginPassword" required placeholder="password">
+            </div>
+            <input type="button"   value="Login" class="submit-btn" onclick="validate()">
+            <!-- onclick input file() -->
+            <a href="#forgot-pw" class="forgot-pw">Forgot Password?</a>
+            </form>
+        
+            <div id="forgot-pw">
+                <form action="" class="from">
+                    <a href="#" class="close">&times;</a>
+                    <h2>Rest Password</h2>
+                    <div class="input-group">
+                        <input type="email" name="email" id="email" required>
+                        <label for="email">email</label>
+                    </div>
+                    <input type="submit" value="Submit" class="submit-btn" id="submit">
+<!-- 
+                    <script>
+                        function check() {
+                            if (form1.loginUser.value == "123" && form1.loginPassword.value == "123") {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    </script> -->
+                
+
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+# name = " jason Todd"
+# print('apple'+ name)
+# print("hello \nyou dumbass")
+# 串接、擷取公開資料
+from flask import Flask  # 載入Flask
+from flask  import request #載入Resquest 物件
+
+app = Flask(
+    __name__,
+    static_folder="static", #靜態檔案的資料夾名稱
+    static_url_path="/www"  #靜態檔案對應的網址路徑
+)  # 建立Application物件
+
+#建立路徑/getSum對應的處理函式
+#利用要求字串(Query String)提供彈性:/getSum?min=最小數字&max=最大數字
+@app.route("/getSum")
+def getSum():# min+(mini+1)+(min+2)+....+max
+    #接受要求字串中的參數資料
+    maxNumber= request.args.get("max",100)
+    maxNumber=int(maxNumber)
+    minNumber= request.args.get("min",1)
+    minNumber=int(minNumber)
+    #以下運算 min+(mini+1)+(min+2)+....+max 總和的迴圈邏輯
+    result=0
+    for n in range(minNumber, maxNumber+1):
+        result+=n
+    #把結果回傳前端
+    return "結果:"+str(result)    
+
+
+# 建立路徑 / 對應的處理函數
+@app.route("/")
+def index():  # 用來回應路徑 / 的處理函數
+    print("請求方法", request .method)
+    print("通訊協定",request. scheme)
+    print("主機名稱",request.host)
+    print("路徑",request.path)
+    print("完整的網址",request.url)
+    lang=request.headers.get("accept-language") #多語言設定
+    if lang.startswith("en"):
+        return "Hello Flask"
+    else:
+        return "哈囉你好"  # 回傳網站首頁的內容
+
+
+@app.route("/data")
+def database():  # 用來回應路徑 / 的處理函數
+    return "My data"  # 回傳網站首頁的內容
+
+
+# 動態路由:建立路徑/user/使用者名稱 對應的處理函數
+@app.route("/user/<Lawrence>")
+def handleuser(Lawrence):  # 用來回應路徑 / 的處理函數
+    if Lawrence == "香蕉":
+        return "My name is " + Lawrence  # 回傳網站首頁的內容
+    else:
+        return "我的名字" + Lawrence
+
+
+app.run()
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background:url('bg.jpg');
+    background-size: cover;
+    font-family: sans-serif;
+}
+.login-wrapper {
+height: 100vh;
+width: 100vw;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.form {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    padding: 80px 40px 40px;
+    background-color: rgb(0,0,0,0,7);
+    border-radius: 10px;
+    color:black;
+    box-shadow:0 15px 25px rgba(0,0,0,0.5);
+}
+.form ::before {
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(225,225,255,0.05);
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+
+.form img {
+    position:absolute;
+    top: -150px;
+    left: -600px;
+    width: 500px;
+    border-radius: 60%;
+}
+
+.form h2{
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    color: rgb(69, 30, 210);
+    font-size: 40px;
+}
+.form .input-group{
+    position: relative;
+}
+.form .input-group input{
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline:none;
+    background-color: transparent;
+    color:inherit;
+}
+
+.form .input-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: .3s ease-out;
+}
+
+.form .input-group input:focus + label,
+.form .input-group input:focus + label {
+    transform: translateY(-18ox);
+    color:magenta;
+    font-size: .8rem;
+}
+.submit-btn{
+    display: block;
+    margin-left: auto;
+    border:none;
+    outline: none;
+    background:magenta;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.form button {
+    display: block;
+    margin-left: auto;
+    border:none;
+    outline: none;
+    background:magenta;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+#forgot-pw {
+    display: none;
+}
+var attempt = 3; // Variable to count number of attempts.
+// Below function Executes on click of login button.
+function validate() {
+    var username = document.getElementById("loginUser").value;
+    var password = document.getElementById("loginPassword").value;
+    if (username == "123" && password == "123") {
+        alert("Login successfully");
+        window.location = "http://127.0.0.1:5000/"; // Redirecting to other page.
+        return false;
+    }
+    else {
+        attempt--;// Decrementing by one.
+        alert("You have left " + attempt + " attempt;");
+        // Disabling fields after 3 attempts.
+        if (attempt == 0) {
+            document.getElementById("loginUser").disabled = true;
+            document.getElementById("loginPassword").disabled = true;
+            document.getElementById("submit").disabled = true;
+            return false;
+        }
+    }
+}
